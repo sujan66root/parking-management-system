@@ -16,19 +16,12 @@ During the development of this project, the following skills were applied and en
   - Writing SQL queries for data manipulation (CRUD operations).
   - Understanding JDBC for Java-Database communication.
 
-- **Java I/O Streams:**
-  - Working with file handling, serialization, and deserialization.
-  - Implementing buffered streams for efficient data handling.
-
 - **Collections Framework:**
-  - Utilizing Java Collections like `List`, `Map`, and `Set` for managing parking slots and vehicles.
+  - Utilizing Java Collections like `List` for managing parking slots and vehicles.
   - Implementing iterators and streams for data processing.
 
 - **Exception Handling:**
   - Creating and handling custom exceptions for robust error management.
-
-- **Unit Testing:**
-  - Writing unit tests using JUnit to ensure code quality and reliability.
 
 - **Version Control:**
   - Using Git and GitHub for version control, project tracking, and collaboration.

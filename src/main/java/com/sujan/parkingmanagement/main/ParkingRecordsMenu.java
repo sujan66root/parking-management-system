@@ -5,6 +5,7 @@ import com.sujan.parkingmanagement.dao.ParkingRecordsDAO;
 import com.sujan.parkingmanagement.model.ParkingRecords;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,6 +22,7 @@ public class ParkingRecordsMenu {
             System.out.println("5. Delete a parking record");
             System.out.println("6. Go back to main menu");
             System.out.println("7. Exit from system");
+            System.out.println("8. Exit a vehicle from parking spaces");
             System.out.print("Enter the option you want to proceed with: ");
             int option = sc.nextInt();
             sc.nextLine(); // Consume newline
@@ -48,6 +50,9 @@ public class ParkingRecordsMenu {
                     System.out.println("Exiting... ");
                     sc.close();
                     System.exit(0);
+                case 8:
+                    exitUpdateVehicle();
+                    System.out.println("Exiting a vehicle...");
                 default:
                     System.out.println("Invalid option. Please try again.");
             }
@@ -58,18 +63,15 @@ public class ParkingRecordsMenu {
         int vehicleId = sc.nextInt();
         System.out.println("Enter space ID: ");
         int spaceId = sc.nextInt();
-        System.out.println("Enter entry time (yyyy-MM-dd HH:mm:ss): ");
-        String entryTimeStr = sc.next();
-        System.out.println("Enter exit time (yyyy-MM-dd HH:mm:ss): ");
-        String exitTimeStr = sc.next();
-        System.out.println("Enter fee: ");
-        double fee = sc.nextDouble();
+        System.out.println("Entry Time (yyyy-MM-dd HH:mm:ss): " + LocalDateTime.now());
+        LocalDateTime entryTimeStr = LocalDateTime.now();
+        double fee = 0;
         sc.nextLine(); // Consume newline
         ParkingRecords pr = new ParkingRecords();
         pr.setVehicle_id(vehicleId);
         pr.setSpace_id(spaceId);
-        pr.setEntry_time(Timestamp.valueOf(entryTimeStr));
-        pr.setExit_time(Timestamp.valueOf(exitTimeStr));
+        pr.setEntry_time(entryTimeStr);
+        pr.setExit_time(null);
         pr.setFee(fee);
         iParkingRecordsDao.addParkingRecords(pr);
 
@@ -106,12 +108,10 @@ public class ParkingRecordsMenu {
             record.setVehicle_id(sc.nextInt());
             System.out.println("Enter new space ID: ");
             record.setSpace_id(sc.nextInt());
-            System.out.println("Enter new entry time (yyyy-MM-dd HH:mm:ss): ");
-            record.setEntry_time(Timestamp.valueOf(sc.next()));
-            System.out.println("Enter new exit time (yyyy-MM-dd HH:mm:ss): ");
-            record.setExit_time(Timestamp.valueOf(sc.next()));
+            System.out.println("Exit Time: ");
+            record.setExit_time(LocalDateTime.now());
             System.out.println("Enter new fee: ");
-            record.setFee(sc.nextDouble());
+            record.setFee(iParkingRecordsDao.calculateParkingFee(record.getEntry_time(), LocalDateTime.now()));
             sc.nextLine(); // Consume newline
 
             iParkingRecordsDao.updateParkingRecord(record);
@@ -124,5 +124,11 @@ public class ParkingRecordsMenu {
         int id = sc.nextInt();
         sc.nextLine(); // Consume newline
         iParkingRecordsDao.deleteParkingRecord(id);
+    }
+    public static void exitUpdateVehicle(){
+        System.out.println("Enter a vehicle id to exit: ");
+        int id = sc.nextInt();
+        sc.nextLine();
+
     }
 }

@@ -1,14 +1,14 @@
 package com.sujan.parkingmanagement.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class ParkingRecords {
     private int id;
     private int space_id;
     private int vehicle_id;
     private double fee;
-    private Date entry_time;
-    private Date exit_time;
+    private LocalDateTime entry_time;
+    private LocalDateTime exit_time;
 
     public int getSpace_id() {
         return space_id;
@@ -34,11 +34,11 @@ public class ParkingRecords {
         this.vehicle_id = vehicle_id;
     }
 
-    public Date getEntry_time() {
+    public LocalDateTime getEntry_time() {
         return entry_time;
     }
 
-    public void setEntry_time(Date entry_time) {
+    public void setEntry_time(LocalDateTime entry_time) {
         this.entry_time = entry_time;
     }
 
@@ -50,11 +50,11 @@ public class ParkingRecords {
         this.fee = fee;
     }
 
-    public Date getExit_time() {
+    public LocalDateTime getExit_time() {
         return exit_time;
     }
 
-    public void setExit_time(Date exit_time) {
+    public void setExit_time(LocalDateTime exit_time) {
         this.exit_time = exit_time;
     }
     public String toString(){

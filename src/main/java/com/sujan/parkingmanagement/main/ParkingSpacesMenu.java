@@ -1,8 +1,11 @@
 package com.sujan.parkingmanagement.main;
 
 import com.sujan.parkingmanagement.dao.IParkingSpaceDao;
+import com.sujan.parkingmanagement.dao.IVehicleDao;
 import com.sujan.parkingmanagement.dao.ParkingSpaceDAO;
+import com.sujan.parkingmanagement.dao.VehiclesDAO;
 import com.sujan.parkingmanagement.model.ParkingSpaces;
+import com.sujan.parkingmanagement.model.vehicles;
 
 import java.util.List;
 import java.util.Scanner;
@@ -10,6 +13,7 @@ import java.util.Scanner;
 public class ParkingSpacesMenu {
     private static final Scanner sc = new Scanner(System.in);
     private static final IParkingSpaceDao iParkingSpaceDao =  new ParkingSpaceDAO();
+    private static final IVehicleDao iVehicleDao = new VehiclesDAO();
     protected static void ParkingSpacesOperations(Scanner sc) {
         while (true) {
             System.out.println("Parking Spaces Operations");
@@ -58,6 +62,11 @@ public class ParkingSpacesMenu {
         System.out.print("Is the space occupied (true/false)? ");
         boolean is_occupied = Boolean.parseBoolean(sc.nextLine());
         System.out.println("Enter vehicle id: (o if none)");
+        System.out.println("List of vehicles available are: ");
+        List<vehicles> availableVehicles = iVehicleDao.getAllVehicles();
+        for(vehicles v: availableVehicles){
+            System.out.println(v);
+        }
         int vehicle_id = sc.nextInt();
         sc.nextLine(); // Consume the leftover newline character
 
